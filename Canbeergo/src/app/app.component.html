@@ -5,13 +5,30 @@
   
   </h1>
   <h2>
-    Find your favorite beer we have on tap!
+    Discover your new favorite beer from our selection from around the world!!!
   </h2>
-  <!-- <img width=100%  src="../../assets/image/beer.jpg"> -->
+  <div   class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+    
+      <button  (click)="MapBeerArray()">
+          <h3>Show Beer Menu </h3>
+      </button>
+  </div>
+
 </div>
-<h1>Beer Menu </h1>
+
+<!-- Category and search Navigation -->
 <div>
-    <button class="btn btn-primary" (click)="onGetBeerInfo()">Get Beer Info</button>
+  
+    <nav>
+        <a routerLink="/beerCategories" routerLinkActive="active">Beer Categories</a>
+        <a routerLink="/beerDetails" routerLinkActive="active">Search Detail</a>
+      </nav>
+
+</div>
+<div>
+
+
     <div>
       <table>
         <tr>
@@ -36,84 +53,6 @@
     </div>
 
     <router-outlet></router-outlet>
-<!-- Get beer Cat -->
-<div>
-  <div class = "container">
-    <button class="btn btn-primary" (click)="onGetBeerCategories()">Get Beer Categories</button>
-    <button class="btn btn-primary" (click)=" MapBeerArray()">Map Beer Array</button>
-    <form>
-      <h2>Showing beer Category</h2>
-      <div>
-        <select #beerSelection (click)="onSelectBeerByCategory(beerSelection.value)">
-          <option *ngFor="let mappedBeerinfo of mappedBeerInfomation"> {{ mappedBeerinfo.category }}</option>
-        </select>
-      </div>
-    </form>
-    <h3>Display Beer</h3>
-    <div>
-        <select #beerDetails (click)="SearchProduct(beerDetails.value)" ng-model="beerSelection">
-            <option  *ngFor="let filteredBeerByCat of filteredBeerByCategory"> {{ filteredBeerByCat.name }}</option>
-          </select>
-    </div>
-
-    <div>  
-        <h4>Product Details:</h4>   
-        </div>  
-    <ul class="beer"  *ngFor="let showBeerDetail of showBeerDetails">
-      <li class="list-group-item">Beer Name:{{ showBeerDetail.name            }}     IBU: {{ showBeerDetail.ibu }}      ABV: {{ showBeerDetail.abv }}       Style: {{ showBeerDetail.style }}     Brewery Location:{{ showBeerDetail.brewery_location }}         Calories{{ showBeerDetail.calories }}</li>
-    </ul>
-  </div>
-</div>
-
-
-<!-- search beer -->
-<h2>Search Beer</h2>
-<div>
-  <div style="text-align:justify">
-
-    <input class="form-control" #searchBeerName placeholder="Spotted Cow" name="beerName">
-    <button class="btn btn-primary" (click)="searchBeer(searchBeerName.value)">Search Beer</button>
-    <ul class="list-group" *ngFor="let searchBeerInfo of searchBeerInfos">
-      <li class="list-group-item">{{ searchBeerInfo.name }} {{ searchBeerInfo.ibu }} {{ searchBeerInfo.abv }}</li>
-    </ul>
-  </div>
-</div>
-
-<div class="container">
-  <!-- forms  submission-->
-  <div class="container">
-    <h2>Add Beer and Categories</h2>
-    <form>
-      <div class="form-group">
-        <label for="name">Beer Name</label>
-        <input type="text" #beerName class="form-control" id="name" required>
-      </div>
-
-      <div class="form-group">
-        <label for="ABV">ABV</label>
-        <input type="text" #beerABV class="form-control" id="ABV">
-      </div>
-      <div class="form-group">
-        <label for="IBU">IBU</label>
-        <input type="text" #beerIBU class="form-control" id="IBU">
-      </div>
-      <div class="form-group">
-        <label for="Calories">Calories</label>
-        <input type="text" #beerCalories class="form-control" id="Calories">
-      </div>
-      <div class="form-group">
-        <label for="Style">Style</label>
-        <input type="text" #beerStyle class="form-control" id="Style">
-      </div>
-      <div>
-        <select #beerCategory>
-          <option *ngFor="let beerCat of beerCats"> {{ beerCat.name }}</option>
-        </select>
-        <button type="submit" class="btn btn-primary" (click)="onAddBeerInfo(beerName.value, beerABV.value, beerIBU.value, beerCalories.value, beerStyle.value, beerCategory.value)">Add
-          Beer Info</button>
-      </div>
-    </form>
-  </div>
 
   </div>
 

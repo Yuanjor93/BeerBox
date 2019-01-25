@@ -1,27 +1,76 @@
-<p>
-  beer-details works!
-</p>
+<!-- search beer -->
+<h2>Search Beer</h2>
+<div>
+  <div style="text-align:justify">
+
+    <input class="form-control" #searchBeerName placeholder="Spotted Cow" name="beerName">
+    <button class="btn btn-primary" (click)="searchBeer(searchBeerName.value)">Search Beer</button>
+    <ul class="list-group" *ngFor="let searchBeerInfo of searchBeerInfos">
+      <li class="list-group-item">{{ searchBeerInfo.name }} {{ searchBeerInfo.ibu }} {{ searchBeerInfo.abv }}</li>
+    </ul>
+  </div>
+</div>
 
 <div class="container">
-  <div [hidden]="submitted">
-    <h1>Add Beer and Categories</h1>
-
-    <input type="text" #beerName>
-    <input type="text" #beerCategory>
-    <input type="text" #beerIBU>
-    <input type="text" #beerCalories>
-    <button class="btn btn-primary" (click)="onAddBeerInfo(beerName.value, beerCategory.value,beerIBU.value,beerCalories.value)">Add Beer Info</button>
+  <!-- forms  submission-->
+  <div class="container">
+    <h2>Add Beer and Categories</h2>
+    <form>
+      <div class="form-group">
+        <label for="name">Beer Name</label>
+        <input type="text" #beerName class="form-control" id="name" required>
+      </div>
+      <div class="form-group">
+        <label for="ABV">ABV</label>
+        <input type="text" #beerABV class="form-control" id="ABV">
+      </div>
+      <div class="form-group">
+        <label for="IBU">IBU</label>
+        <input type="text" #beerIBU class="form-control" id="IBU">
+      </div>
+      <div class="form-group">
+        <label for="Calories">Calories</label>
+        <input type="text" #beerCalories class="form-control" id="Calories">
+      </div>
+      <div class="form-group">
+        <label for="Style">Style</label>
+        <input type="text" #beerStyle class="form-control" id="Style">
+      </div>
+      <div>
+        <select #beerCategory>
+          <option *ngFor="let beerCat of beerCats"> {{ beerCat.name }}</option>
+        </select>
+        <button type="submit" class="btn btn-primary" (click)="onAddBeerInfo(beerName.value, beerABV.value, beerIBU.value, beerCalories.value, beerStyle.value, beerCategory.value)">Add
+          Beer Info</button>
+      </div>
+    </form>
   </div>
 
+  <div>
+    <h4>
+      Hidden Search for Name by ID
+    </h4>
+    <button type="button" class="btn btn-secondary" (click)="showHiddenSearchOption()"> show additional search options</button>
+    <div [hidden]="!displayHiddenSearch">
+      <div style="text-align:justify">
+        <input #beerID placeholder="38" name="beerID">
+        <button (click)="onSearchBeerById(beerID.value)">Search Beer By ID</button>
+        <div *ngFor="let beerIdData of beerIdDatas">
+            {{ beerIdData.name}} 
+        </div>
+      </div>
 
 
+      <div style="text-align:justify">
+        <input  #categoryID placeholder="99" name="categoryID">
+        <button (click)="onSearchBeerCategoryByID(categoryID.value)">Search Category By ID</button>
+        <div *ngFor="let categoryIdData of categoryIdDatas">
+            {{ categoryIdData.name}} 
+        </div>
+        
+      </div>
 
+    </div>
+  </div>
 
-  
-<div>
-<button class="btn btn-primary" (click)="onGetBeerInfo()">Get Beer Info</button>
-<ul class="list-group" *ngFor="let getBeerInfo of getBeerInfos">
-<li class="list-group-item">Name {{ getBeerInfo.name }}  IBU {{ getBeerInfo.ibu }}    ABV {{ getBeerInfo.abv }}      Style{{ getBeerInfo.style }}     Brewery{{ getBeerInfo.brewery }} {{ getBeerInfo.location }}     Calories {{ getBeerInfo.calories }}    Category {{getBeerInfo.category}}</li>
-
-</ul>
 </div>

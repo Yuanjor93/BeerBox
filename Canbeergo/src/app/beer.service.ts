@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams} from '@angular/common/http';
+import { Injectable, Output } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { map, filter, scan } from 'rxjs/operators';
 
 import { Categories } from './beer/categories.model';
@@ -10,26 +10,30 @@ import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class BeerService {
-constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient) { }
 
-testData: Categories[];
+    getBeerCategories(): Observable<Categories[]> {
+        // automated extract the body of the response
+        return this.httpClient.get<Categories[]>('http://apichallenge.canpango.com/categories/');
+    }
 
-getBeerCategories(): Observable<Categories[]> {
-    // automated extract the body of the response
-    return this.httpClient.get<Categories[]>('http://apichallenge.canpango.com/categories/');
-}
-
-getBeerInfo(): Observable<BeerInfo[]> {
-    // automated extract the body of the response
-    return this.httpClient.get<BeerInfo[]>('http://apichallenge.canpango.com/beers/');
-}
+    getBeerInfo(): Observable<BeerInfo[]> {
+        // automated extract the body of the response
+        return this.httpClient.get<BeerInfo[]>('http://apichallenge.canpango.com/beers/');
+    }
 
 
+    searchBeer(beerName: string): Observable<BeerInfo[]> {
+        return this.httpClient.get<BeerInfo[]>('http://apichallenge.canpango.com/beers/search/?q=' + beerName);
+    }
 
-searchBeer(beerName: string): Observable<BeerInfo[]> {
-    const params = new HttpParams().set('Cow', beerName);
-   return this.httpClient.get<BeerInfo[]>('http://apichallenge.canpango.com/beers/search/?q=', {params});
-}
 
+    getBeerByID(beerID: string): Observable<any> {
+        return this.httpClient.get<BeerInfo[]>('http://apichallenge.canpango.com/beers/' + beerID + '/');
+    }
+
+    getCategoryByID(categoryID: string): Observable<any> {
+        return this.httpClient.get<Categories[]>('http://apichallenge.canpango.com/category/' + categoryID + '/');
+    }
 
 }

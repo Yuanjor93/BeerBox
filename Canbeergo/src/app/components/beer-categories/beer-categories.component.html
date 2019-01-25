@@ -1,8 +1,7 @@
 <!-- Get beer Cat -->
 <div>
     <div class = "container">
-      <button class="btn btn-primary" (click)="onGetBeerCategories()">Get Beer Categories</button>
-      <button class="btn btn-primary" (click)=" MapBeerArray()">Map Beer Array</button>
+
       <form>
         <h2>Showing beer Category</h2>
         <div>
@@ -14,16 +13,32 @@
       <h3>Display Beer</h3>
       <div>
           <select #beerDetails (click)="SearchProduct(beerDetails.value)" ng-model="beerSelection">
+              <option selected disabled>Choose here</option>
               <option  *ngFor="let filteredBeerByCat of filteredBeerByCategory"> {{ filteredBeerByCat.name }}</option>
             </select>
       </div>
-  
-      <div>  
-          <h4>Product Details:</h4>   
-          </div>  
-      <ul class="beer"  *ngFor="let showBeerDetail of showBeerDetails">
-        <li class="list-group-item">Beer Name:{{ showBeerDetail.name            }}     IBU: {{ showBeerDetail.ibu }}      ABV: {{ showBeerDetail.abv }}       Style: {{ showBeerDetail.style }}     Brewery Location:{{ showBeerDetail.brewery_location }}         Calories{{ showBeerDetail.calories }}</li>
-      </ul>
+      <div>
+          <table>
+            <tr>
+              <th> Name </th>
+              <th> ABV </th>
+              <th> IBU </th>
+              <th> Calories</th>
+              <th> Style</th>
+              <th> Location</th>
+              <th> Category</th>
+            </tr>
+            <tr *ngFor="let showBeerDetail of showBeerDetails">
+              <td>{{showBeerDetail.name}}</td>
+              <td>{{showBeerDetail.abv}}</td>
+              <td>{{showBeerDetail.ibu}}</td>
+              <td>{{showBeerDetail.calories }} </td>
+              <td>{{showBeerDetail.style }} </td>
+              <td>{{showBeerDetail.brewery_location }} </td>
+              <td>{{showBeerDetail.category }} </td>
+            </tr>
+          </table>
+        </div>
     </div>
   </div>
   
