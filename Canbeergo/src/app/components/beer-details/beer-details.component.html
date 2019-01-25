@@ -1,0 +1,27 @@
+<p>
+  beer-details works!
+</p>
+
+<div class="container">
+  <div [hidden]="submitted">
+    <h1>Add Beer and Categories</h1>
+
+    <input type="text" #beerName>
+    <input type="text" #beerCategory>
+    <input type="text" #beerIBU>
+    <input type="text" #beerCalories>
+    <button class="btn btn-primary" (click)="onAddBeerInfo(beerName.value, beerCategory.value,beerIBU.value,beerCalories.value)">Add Beer Info</button>
+  </div>
+
+
+
+
+
+  
+<div>
+<button class="btn btn-primary" (click)="onGetBeerInfo()">Get Beer Info</button>
+<ul class="list-group" *ngFor="let getBeerInfo of getBeerInfos">
+<li class="list-group-item">Name {{ getBeerInfo.name }}  IBU {{ getBeerInfo.ibu }}    ABV {{ getBeerInfo.abv }}      Style{{ getBeerInfo.style }}     Brewery{{ getBeerInfo.brewery }} {{ getBeerInfo.location }}     Calories {{ getBeerInfo.calories }}    Category {{getBeerInfo.category}}</li>
+
+</ul>
+</div>
